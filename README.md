@@ -19,13 +19,13 @@ from PyDeepLX import PyDeepLX
 targetText = PyDeepLX.translate("你好世界") # Return String
 
 # Specify the source and target languages
-targetText = PyDeepLX.translate("你好世界", "ZH", "JP") # Return String
+targetText = PyDeepLX.translate("你好世界", "ZH", "EN") # Return String
 
 # Need alternative results
-targetText = PyDeepLX.translate("毫无疑问的", "ZH", "JP", True) # Return List: ['Without a doubt', 'No doubt']
+targetText = PyDeepLX.translate("毫无疑问的", "ZH", "EN", True) # Return List: ['Without a doubt', 'No doubt']
 
 # Print the results
-targetText = PyDeepLX.translate("毫无疑问的", "ZH", "JP", True, True)
+targetText = PyDeepLX.translate("毫无疑问的", "ZH", "EN", True, True)
 ```
 
 ## PyPi
