@@ -5,7 +5,7 @@ A Python package for unlimited DeepL translation
 [OwO-Network/DeepLX](https://github.com/OwO-Network/DeepLX): Permanently free DeepL API written in Golang.
 
 ## Description
-This is a Python package translated by DeepL, I didn't limit the number of translations in the code, if there is a `429` error, it means your IP has been blocked by DeepL temporarily, please don't request it frequently in a short time.
+This is a Python package for DeepL translation, I didn't limit the number of translations in the code, if there is a `429` error, it means your IP has been blocked by DeepL temporarily, please don't request it frequently in a short time.
 
 ## Usage
 ### Install Package
