@@ -16,16 +16,16 @@ pip install PyDeepLX
 ```python
 from PyDeepLX import PyDeepLX
 # By default, the source language is automatically recognized and translated into English without providing any alternative results.
-targetText = PyDeepLX.translate("你好世界") # Return String
+PyDeepLX.translate("你好世界") # Return String
 
 # Specify the source and target languages
-targetText = PyDeepLX.translate("你好世界", "ZH", "EN") # Return String
+PyDeepLX.translate("你好世界", "ZH", "EN") # Return String
 
 # Need alternative results
-targetText = PyDeepLX.translate("毫无疑问的", "ZH", "EN", True) # Return List: ['Without a doubt', 'No doubt']
+PyDeepLX.translate("毫无疑问的", "ZH", "EN", True) # Return List: ['Without a doubt', 'No doubt']
 
 # Print the results
-targetText = PyDeepLX.translate("毫无疑问的", "ZH", "EN", True, True)
+PyDeepLX.translate("毫无疑问的", "ZH", "EN", True, True)
 ```
 
 ## PyPi
