@@ -29,7 +29,7 @@ setup(
     zip_safe=False,
 
     install_requires=[
-        'httpx',
+        'httpx[socks]',
         'langdetect'
     ],
     classifiers=[
