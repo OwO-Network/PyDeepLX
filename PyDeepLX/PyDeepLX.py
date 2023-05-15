@@ -53,7 +53,7 @@ def getTimestamp(iCount: int) -> int:
         return ts
 
 
-def translate(text, sourceLang=None, targetLang=None, needAlternative=False, printResult=False):
+def translate(text, sourceLang=None, targetLang=None, needAlternative=False, printResult=False, proxies=None):
     iCount = getICount(text)
     id = getRandomNumber()
     if sourceLang == None:
@@ -89,29 +89,31 @@ def translate(text, sourceLang=None, targetLang=None, needAlternative=False, pri
     else:
         postDataStr = postDataStr.replace(
             "\"method\":\"", "\"method\": \"", -1)
-    resp = httpx.post(url=deeplAPI, data=postDataStr, headers=headers)
-    respStatusCode = resp.status_code
-    respText = resp.text
-    respJson = json.loads(respText)
-    targetTextArray = []
-    if respStatusCode == 200:
-        if needAlternative == True:
-            targetText = respJson["result"]["texts"][0]["text"]
-            if printResult == True:
-                print(targetText)
-            for item in respJson["result"]["texts"][0]["alternatives"]:
-                targetTextArray.append(item["text"])
+    
+    with httpx.Client(proxies=proxies) as client:
+        resp = client.post(url=deeplAPI, data=postDataStr, headers=headers)
+        respStatusCode = resp.status_code
+        respText = resp.text
+        respJson = json.loads(respText)
+        targetTextArray = []
+        if respStatusCode == 200:
+            if needAlternative == True:
+                targetText = respJson["result"]["texts"][0]["text"]
                 if printResult == True:
-                    print(item["text"])
-            return targetTextArray
+                    print(targetText)
+                for item in respJson["result"]["texts"][0]["alternatives"]:
+                    targetTextArray.append(item["text"])
+                    if printResult == True:
+                        print(item["text"])
+                return targetTextArray
+            else:
+                targetText = respJson["result"]["texts"][0]["text"]
+                if printResult == True:
+                    print(targetText)
+                return targetText
         else:
-            targetText = respJson["result"]["texts"][0]["text"]
-            if printResult == True:
-                print(targetText)
-            return targetText
-    else:
-        print("Error", respStatusCode)
-        return None
+            print("Error", respStatusCode)
+            return None
 
 # Example Call
 # translate("明天你好", "ZH", "EN", True, True)
