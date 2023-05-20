@@ -26,6 +26,9 @@ PyDeepLX.translate("毫无疑问的", "ZH", "EN", True) # Return List: ['Without
 
 # Print the results
 PyDeepLX.translate("毫无疑问的", "ZH", "EN", True, True)
+
+# Using proxy
+PyDeepLX.translate(text="毫无疑问的", sourceLang="ZH", targetLang="EN", needAlternative=False, printResult=False, proxies="socks5://127.0.0.1:7890")
 ```
 
 ## PyPi

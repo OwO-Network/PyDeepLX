@@ -2,7 +2,7 @@
 Author: Vincent Young
 Date: 2023-04-27 00:44:01
 LastEditors: Vincent Young
-LastEditTime: 2023-04-27 01:49:55
+LastEditTime: 2023-05-21 03:45:32
 FilePath: /PyDeepLX/PyDeepLX/PyDeepLX.py
 Telegram: https://t.me/missuo
 
@@ -126,4 +126,4 @@ def translate(text, sourceLang=None, targetLang=None, needAlternative=False, pri
             return None
 
 # Example Call
-# translate("明天你好", "ZH", "EN", True, True)
+translate("明天你好", "ZH", "EN", True, True, "socks5://127.0.0.1:7890")
