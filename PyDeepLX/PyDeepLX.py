@@ -2,7 +2,7 @@
 Author: Vincent Young
 Date: 2023-04-27 00:44:01
 LastEditors: Vincent Young
-LastEditTime: 2023-05-21 03:45:32
+LastEditTime: 2023-05-21 03:58:18
 FilePath: /PyDeepLX/PyDeepLX/PyDeepLX.py
 Telegram: https://t.me/missuo
 
@@ -97,7 +97,7 @@ def translate(text, sourceLang=None, targetLang=None, needAlternative=False, pri
         postDataStr = postDataStr.replace(
             "\"method\":\"", "\"method\": \"", -1)
         
-    # Add proxy (e.g. proxies='socks5://127.0.0.1:9150')
+    # Add proxy (e.g. proxies='socks5://127.0.0.1:7890')
     with httpx.Client(proxies=proxies) as client:
         resp = client.post(url=deeplAPI, data=postDataStr, headers=headers)
         respStatusCode = resp.status_code
@@ -126,4 +126,4 @@ def translate(text, sourceLang=None, targetLang=None, needAlternative=False, pri
             return None
 
 # Example Call
-translate("明天你好", "ZH", "EN", True, True, "socks5://127.0.0.1:7890")
+# translate("明天你好", "ZH", "EN", True, True, "socks5://127.0.0.1:7890")
