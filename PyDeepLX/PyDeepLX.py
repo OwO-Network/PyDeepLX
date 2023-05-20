@@ -30,6 +30,13 @@ headers = {
     "Connection": "keep-alive"
 }
 
+
+class TooManyRequestsException(Exception):
+    "Raised when there is a 429 error"
+    def __str__(self):
+        return "PyDeepLX Error: Too many requests, your IP has been blocked by DeepL temporarily, please don't request it frequently in a short time."
+
+
 def detectLang(translateText) -> str:
     language = detect(translateText)
     return language.upper()
@@ -112,6 +119,8 @@ def translate(text, sourceLang=None, targetLang=None, needAlternative=False, pri
                 if printResult == True:
                     print(targetText)
                 return targetText
+        elif respStatusCode == 429:
+            raise TooManyRequestsException
         else:
             print("Error", respStatusCode)
             return None
