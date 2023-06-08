@@ -55,11 +55,12 @@ def getRandomNumber() -> int:
 
 def getTimestamp(iCount: int) -> int:
     ts = int(time.time() * 1000)
-    if iCount != 0:
-        iCount += 1
-        return ts - ts % iCount + iCount
-    else:
+
+    if iCount == 0:
         return ts
+
+    iCount += 1
+    return ts - ts % iCount + iCount
 
 
 def translate(
@@ -72,9 +73,10 @@ def translate(
 ):
     iCount = getICount(text)
     id = getRandomNumber()
-    if sourceLang == None:
+
+    if sourceLang is None:
         sourceLang = detectLang(text)
-    if targetLang == None:
+    if targetLang is None:
         targetLang = "EN"
 
     postData = {
@@ -106,29 +108,30 @@ def translate(
     with httpx.Client(proxies=proxies) as client:
         resp = client.post(url=deeplAPI, data=postDataStr, headers=headers)
         respStatusCode = resp.status_code
+
+        if respStatusCode == 429:
+            raise TooManyRequestsException
+
+        if respStatusCode != 200:
+            print("Error", respStatusCode)
+            return
+
         respText = resp.text
         respJson = json.loads(respText)
+
+        if not needAlternative:
+            targetText = respJson["result"]["texts"][0]["text"]
+            if printResult:
+                print(targetText)
+            return targetText
+
         targetTextArray = []
-        if respStatusCode == 200:
-            if needAlternative == True:
-                targetText = respJson["result"]["texts"][0]["text"]
-                if printResult == True:
-                    print(targetText)
-                for item in respJson["result"]["texts"][0]["alternatives"]:
-                    targetTextArray.append(item["text"])
-                    if printResult == True:
-                        print(item["text"])
-                return targetTextArray
-            else:
-                targetText = respJson["result"]["texts"][0]["text"]
-                if printResult == True:
-                    print(targetText)
-                return targetText
-        elif respStatusCode == 429:
-            raise TooManyRequestsException
-        else:
-            print("Error", respStatusCode)
-            return None
+        for item in respJson["result"]["texts"][0]["alternatives"]:
+            targetTextArray.append(item["text"])
+            if printResult:
+                print(item["text"])
+
+        return targetTextArray
 
 
 # Example Call
