@@ -67,7 +67,7 @@ def translate(
     text,
     sourceLang=None,
     targetLang=None,
-    needAlternative=False,
+    numberAlternative=0,
     printResult=False,
     proxies=None,
 ):
@@ -79,12 +79,14 @@ def translate(
     if targetLang is None:
         targetLang = "EN"
 
+    numberAlternative = max(min(3, numberAlternative), 0)
+
     postData = {
         "jsonrpc": "2.0",
         "method": "LMT_handle_texts",
         "id": id,
         "params": {
-            "texts": [{"text": text, "requestAlternatives": 3}],
+            "texts": [{"text": text, "requestAlternatives": numberAlternative}],
             "splitting": "newlines",
             "lang": {
                 "source_lang_user_selected": sourceLang,
@@ -119,7 +121,7 @@ def translate(
         respText = resp.text
         respJson = json.loads(respText)
 
-        if not needAlternative:
+        if numberAlternative <= 1:
             targetText = respJson["result"]["texts"][0]["text"]
             if printResult:
                 print(targetText)
