@@ -38,11 +38,6 @@ class TooManyRequestsException(Exception):
         return "PyDeepLX Error: Too many requests, your IP has been blocked by DeepL temporarily, please don't request it frequently in a short time."
 
 
-def detectLang(translateText) -> str:
-    language = detect(translateText)
-    return language.upper()
-
-
 def getICount(translateText) -> int:
     return translateText.count("i")
 
@@ -65,19 +60,14 @@ def getTimestamp(iCount: int) -> int:
 
 def translate(
     text,
-    sourceLang=None,
-    targetLang=None,
+    sourceLang="auto",
+    targetLang="en",
     numberAlternative=0,
     printResult=False,
     proxies=None,
 ):
     iCount = getICount(text)
     id = getRandomNumber()
-
-    if sourceLang is None:
-        sourceLang = detectLang(text)
-    if targetLang is None:
-        targetLang = "EN"
 
     numberAlternative = max(min(3, numberAlternative), 0)
 

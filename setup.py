@@ -28,10 +28,7 @@ setup(
     platforms='any',
     zip_safe=False,
 
-    install_requires=[
-        'httpx[socks,brotli]',
-        'langdetect'
-    ],
+    install_requires=['httpx[socks,brotli]'],
     classifiers=[
         'Environment :: Web Environment',
         'Intended Audience :: Developers',
