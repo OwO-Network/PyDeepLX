@@ -62,7 +62,7 @@ def translate(
     text,
     sourceLang="auto",
     targetLang="en",
-    numberAlternative=0,
+    numberAlternative=3,
     printResult=False,
     proxies=None,
 ):
@@ -128,3 +128,5 @@ def translate(
 
 # Example Call
 # translate("明天你好", "ZH", "EN", True, True, "socks5://127.0.0.1:7890")
+translate("明天你好", "ZH", "EN", 3, True)
+

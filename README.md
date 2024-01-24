@@ -29,10 +29,10 @@ PyDeepLX.translate("你好世界") # Return String
 PyDeepLX.translate("你好世界", "ZH", "EN") # Return String
 
 # Need alternative results
-PyDeepLX.translate("毫无疑问的", "ZH", "EN", 2) # Return List: ['Without a doubt', 'No doubt']
+PyDeepLX.translate("毫无疑问的", "ZH", "EN", 3) # Return List: ['Without a doubt', 'No doubt']
 
 # Print the results
-PyDeepLX.translate("毫无疑问的", "ZH", "EN", True, True)
+PyDeepLX.translate("毫无疑问的", "ZH", "EN", 3, True)
 
 # Using proxy
 PyDeepLX.translate(text="毫无疑问的", sourceLang="ZH", targetLang="EN", numberAlternative=0, printResult=False, proxies="socks5://127.0.0.1:7890")
