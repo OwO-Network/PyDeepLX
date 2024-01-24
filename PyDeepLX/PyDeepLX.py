@@ -62,7 +62,7 @@ def translate(
     text,
     sourceLang="auto",
     targetLang="en",
-    numberAlternative=3,
+    numberAlternative=0,
     printResult=False,
     proxies=None,
 ):
