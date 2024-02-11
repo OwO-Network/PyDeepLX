@@ -12,7 +12,6 @@ import random
 import time
 import json
 import httpx
-from langdetect import detect
 
 
 deeplAPI = "https://www2.deepl.com/jsonrpc"
