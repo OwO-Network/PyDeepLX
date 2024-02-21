@@ -2,7 +2,7 @@
 Author: Vincent Young
 Date: 2023-04-27 00:42:10
 LastEditors: Vincent Young
-LastEditTime: 2024-01-24 11:29:41
+LastEditTime: 2024-02-21 13:07:28
 FilePath: /PyDeepLX/setup.py
 Telegram: https://t.me/missuo
 
@@ -16,7 +16,7 @@ with open("README.md","r") as fh:
 setup(
     name="PyDeepLX",
     author="missuo",
-    version="1.0.6",
+    version="1.0.7",
     license='MIT',
     long_description= long_description,
     long_description_content_type="text/markdown",
