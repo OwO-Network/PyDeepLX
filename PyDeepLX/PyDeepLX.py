@@ -83,11 +83,13 @@ def translate(
             },
             "timestamp": getTimestamp(iCount),
             "commonJobParams": {
-                "wasSpoken": False,
-                "transcribe_as": "",
+                "quality": "normal",
+                "mode": "translate",
+                "textType": "plaintext"
             },
         },
     }
+    
     postDataStr = json.dumps(postData, ensure_ascii=False)
 
     if (id + 5) % 29 == 0 or (id + 3) % 13 == 0:
@@ -117,10 +119,18 @@ def translate(
             return targetText
 
         targetTextArray = []
-        for item in respJson["result"]["texts"][0]["alternatives"]:
-            targetTextArray.append(item["text"])
+        alternatives = respJson["result"]["texts"][0]["alternatives"]
+        if len(alternatives) == 0:
+            print("No found alternatives")
+            targetText = respJson["result"]["texts"][0]["text"]
+            targetTextArray.append(targetText)
             if printResult:
-                print(item["text"])
+                print(targetText)
+        else:
+            for item in alternatives:
+                targetTextArray.append(item["text"])
+                if printResult:
+                    print(item["text"])
 
         return targetTextArray
 
